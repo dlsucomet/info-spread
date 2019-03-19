@@ -462,7 +462,7 @@ def print_infection_stats(G):
     Prints the number of succeptible, infected and removed nodes in graph G.
     """
     i,er,et,sr,st,r = get_infection_stats(G)
-    print "Ignorant: %d; Exposed to Rumor: %d; Exposed to Truth: %d; Spreader of Rumor: %d; Spreaders of Truth: %d; Removed %d"% (len(i),len(er),len(et),len(sr),len(st),len(r))
+    print("Ignorant: %d; Exposed to Rumor: %d; Exposed to Truth: %d; Spreader of Rumor: %d; Spreaders of Truth: %d; Removed %d"% (len(i),len(er),len(et),len(sr),len(st),len(r)))
 
 def run_spread_simulation(G, model, params):
 
@@ -492,7 +492,7 @@ def run_spread_simulation(G, model, params):
 #         draw_network_to_file(G,pos,stop) uncomment to save network stills to a file.
     
         stop += 1
-    print 'done.'
+    print('done.')
     return i_results,er_results,et_results,sr_results,st_results,r_results, stop #return our results for plotting
 
 
@@ -589,7 +589,7 @@ def draw_network_to_file(G,pos,t):
 
 N = 1000 #number of nodes
 
-#uncomment the type of network to run simulation on
+# uncomment the type of network to run simulation on
 nw = nx.barabasi_albert_graph(N, 3)
 # nw = nx.complete_graph(N)
 # nw = nx.watts_strogatz_graph(N,2,0.4)
@@ -627,12 +627,12 @@ params = ES_Params(4,0.15,
 m = spread_model_factory_ES(params)
 
 #uncomment the method of initializing exposed, and spreaders
-#initialise_rumor_random(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #random selection of spreaders and exposed
+# initialise_rumor_random(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #random selection of spreaders and exposed
 initialise_truth_degree(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest degree as spreaders of truth
 # initialise_rumor_degree(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest degree as spreaders of rumor
-#initialise_truth_betweenness(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest betweenness centrality as spreaders of truth
+# initialise_truth_betweenness(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest betweenness centrality as spreaders of truth
 # initialise_rumor_betweenness(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest betweenness centrality as spreaders of rumor
 
 #run simulation and show graph
-I,Er,Et,Sr,St,R,endtime= run_spread_simulation(nw, m, params)
-plot_infection(I,Er,Et,Sr,St,R,nw,params)
+I, Er, Et, Sr, St, R, endtime = run_spread_simulation(nw, m, params)
+plot_infection(I, Er, Et, Sr, St, R, nw, params)
