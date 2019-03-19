@@ -497,7 +497,7 @@ def run_spread_simulation(G, model, params):
 
 
 
-def plot_infection(I,Er,Et,Sr,St,R,G,params):
+def plot_infection(I, Er, Et, Sr, St, R, G, params, fileName):
     """
     :param I: time-ordered list from simulation output indicating how ignorant count changes over time
     :param E: time-ordered list from simulation output indicating how exposed count changes over time
@@ -547,7 +547,9 @@ def plot_infection(I,Er,Et,Sr,St,R,G,params):
                     ', δ_r = ' + str(params.delta_r) +
                     ', Λ = ' + str(params.birth) +
                     ', μ = ' + str(params.death))
-    plt.show()
+#    plt.show()
+    plt.savefig("../outputs/"+str(fileName)+".png")
+    plt.clf()
     
     
     
@@ -587,13 +589,13 @@ def draw_network_to_file(G,pos,t):
     plt.savefig("video_of_spread/image"+str(t)+".png")
     plt.clf()
 
-N = 1000 #number of nodes
+N = 10000 #number of nodes
 
 # uncomment the type of network to run simulation on
-nw = nx.barabasi_albert_graph(N, 3)
-# nw = nx.complete_graph(N)
-# nw = nx.watts_strogatz_graph(N,2,0.4)
-# nw = nx.erdos_renyi_graph(N, 0.6)
+#nw = nx.barabasi_albert_graph(N, 3)
+nw = nx.complete_graph(N)
+#nw = nx.watts_strogatz_graph(N,2,0.4)
+#nw = nx.erdos_renyi_graph(N, 0.6)
 
 reset(nw) #initialize all nodes to ignorant
 
@@ -613,18 +615,18 @@ ES parameters(Lambda, mu,
 
 #uncomment the type of simulation to run, either SS or ES
 
-# params = SS_Params(4,0.15,
-#                   0.6,0.4,0.15,
-#                   0.6,0.4,0.15,
-#                   0.2,0.2,
-#                   50, 50, 50, 50)
-# m = spread_model_factory_SS(params)
-params = ES_Params(4,0.15,
-                  0.6,0.4,0.15,
-                  0.6,0.4,0.15,
-                  0.2,0.2,
-                  50, 50, 50, 50)
-m = spread_model_factory_ES(params)
+params = SS_Params(4,0.15,
+                   0.6,0.4,0.15,
+                   0.6,0.4,0.15,
+                   0.2,0.2,
+                   50, 50, 50, 50)
+m = spread_model_factory_SS(params)
+#params = ES_Params(4,0.15,
+#                  0.6,0.4,0.15,
+#                  0.6,0.4,0.15,
+#                  0.2,0.2,
+#                  50, 50, 50, 50)
+#m = spread_model_factory_ES(params)
 
 #uncomment the method of initializing exposed, and spreaders
 # initialise_rumor_random(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #random selection of spreaders and exposed
@@ -635,4 +637,4 @@ initialise_truth_degree(nw, params.sr_init, params.st_init, params.er_init, para
 
 #run simulation and show graph
 I, Er, Et, Sr, St, R, endtime = run_spread_simulation(nw, m, params)
-plot_infection(I, Er, Et, Sr, St, R, nw, params)
+plot_infection(I, Er, Et, Sr, St, R, nw, params, "SS_Truth_Degree")
