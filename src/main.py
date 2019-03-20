@@ -649,63 +649,63 @@ params = SS_Params(4,0.3,
                    50, 50, 50, 50)
 m = spread_model_factory_SS(params)
 
-#Rumor free
-params = SS_Params(4,0.15,
-                   0.6,0.6,0.15,
-                   0.1,0.3,0.4,
-                   0.38,0.1,
-                   50, 50, 50, 50)
-m = spread_model_factory_SS(params)
+# #Rumor free
+# params = SS_Params(4,0.15,
+#                    0.6,0.6,0.15,
+#                    0.1,0.3,0.4,
+#                    0.38,0.1,
+#                    50, 50, 50, 50)
+# m = spread_model_factory_SS(params)
 
-#Truth-rumor free
-params = SS_Params(4,0.15,
-                   0.2,0.7,0.3,
-                   0.2,0.7,0.3,
-                   0.38,0.1,
-                   50, 50, 50, 50)
-m = spread_model_factory_SS(params)
+# #Truth-rumor free
+# params = SS_Params(4,0.15,
+#                    0.2,0.7,0.3,
+#                    0.2,0.7,0.3,
+#                    0.38,0.1,
+#                    50, 50, 50, 50)
+# m = spread_model_factory_SS(params)
 
-# Truth-Rumor coexisting
-params = SS_Params(4,0.15,
-                   0.35,0.65,0.15,
-                   0.35,0.65,0.15,
-                   0.1,0.1,
-                   50, 50, 50, 50)
-m = spread_model_factory_SS(params)
+# # Truth-Rumor coexisting
+# params = SS_Params(4,0.15,
+#                    0.35,0.65,0.15,
+#                    0.35,0.65,0.15,
+#                    0.1,0.1,
+#                    50, 50, 50, 50)
+# m = spread_model_factory_SS(params)
 
-###################################################
+# ###################################################
 #ES
-#Truth free
-params = ES_Params(4,0.15,
-                   0.1,0.2,0.3,
-                   0.65,0.6,0.1,
-                   0.38,0.2,
-                   50, 50, 50, 50)
-m = spread_model_factory_ES(params)
+# #Truth free
+# params = ES_Params(4,0.15,
+#                    0.1,0.2,0.3,
+#                    0.65,0.6,0.1,
+#                    0.38,0.2,
+#                    50, 50, 50, 50)
+# m = spread_model_factory_ES(params)
 
-#Rumor free
-params = ES_Params(4,0.15,
-                   0.65,0.6,0.1,
-                   0.1,0.2,0.3,
-                   0.2,0.38,
-                   50, 50, 50, 50)
-m = spread_model_factory_ES(params)
+# #Rumor free
+# params = ES_Params(4,0.15,
+#                    0.65,0.6,0.1,
+#                    0.1,0.2,0.3,
+#                    0.2,0.38,
+#                    50, 50, 50, 50)
+# m = spread_model_factory_ES(params)
 
-#Truth-rumor free
-params = ES_Params(4,0.15,
-                   0.2,0.7,0.3,
-                   0.2,0.7,0.3,
-                   0.38,0.38,
-                   50, 50, 50, 50)
-m = spread_model_factory_ES(params)
+# #Truth-rumor free
+# params = ES_Params(4,0.15,
+#                    0.2,0.7,0.3,
+#                    0.2,0.7,0.3,
+#                    0.38,0.38,
+#                    50, 50, 50, 50)
+# m = spread_model_factory_ES(params)
 
-# Truth-Rumor coexisting
-params = ES_Params(4,0.15,
-                   0.35,0.65,0.15,
-                   0.35,0.65,0.15,
-                   0.1,0.1,
-                   50, 50, 50, 50)
-m = spread_model_factory_ES(params)
+# # Truth-Rumor coexisting
+# params = ES_Params(4,0.15,
+#                    0.35,0.65,0.15,
+#                    0.35,0.65,0.15,
+#                    0.1,0.1,
+#                    50, 50, 50, 50)
+# m = spread_model_factory_ES(params)
 
 #uncomment the method of initializing exposed, and spreaders
 initialise_rumor_random(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #random selection of spreaders and exposed
@@ -716,5 +716,16 @@ initialise_rumor_random(nw, params.sr_init, params.st_init, params.er_init, para
 
 #run simulation and show graph
 I, Er, Et, Sr, St, R, endtime = run_spread_simulation(nw, m, params)
-plot_infection(I, Er, Et, Sr, St, R, nw, params, "ES_Rumor_Random")
-saveResultsToFile(I, Er, Et, Sr, St, R, str(params), "completeG", "ES_Rumor_Random")
+plot_infection(I, Er, Et, Sr, St, R, nw, params, "SS_TruthFree_Rumor_Random")
+saveResultsToFile(I, Er, Et, Sr, St, R, str(params), "completeG", "SS_TruthFree_Rumor_Random")
+
+# TruthFree
+# RumorFree
+# TruthRumorFree
+# TruthRumorCoexist
+
+# Rumor_Random
+# Truth_Degree
+# Rumor_Degree
+# Truth_Between
+# Rumor_Between
