@@ -42,6 +42,9 @@ class ES_Params:
         self.er_init = er_init
     modeltype = 'ES'
 
+    def __str__(self):
+        return str(self.birth) + ", " + str(self.death) + ", " + str(self.alpha_t) + ", " + str(self.alpha_r) + ", " + str(self.beta_t) + ", " + str(self.beta_r) + ", " + str(self.gamma_t) + ", " + str(self.gamma_r) + ", " + str(self.epsilon_t) + ", " + str(self.epsilon_r) + ", " + str(self.st_init) + ", " + str(self.sr_init) + ", " + str(self.et_init) + ", " + str(self.er_init)
+
 class SS_Params:
     def __init__(self, birth, death, alpha_t, beta_t, gamma_t, 
                                     alpha_r, beta_r, gamma_r, 
@@ -62,6 +65,9 @@ class SS_Params:
         self.et_init = et_init
         self.er_init = er_init
     modeltype = 'SS'
+
+    def __str__(self):
+        return str(self.birth) + ", " + str(self.death) + ", " + str(self.alpha_t) + ", " + str(self.alpha_r) + ", " + str(self.beta_t) + ", " + str(self.beta_r) + ", " + str(self.gamma_t) + ", " + str(self.gamma_r) + ", " + str(self.st_init) + ", " + str(self.sr_init) + ", " + str(self.et_init) + ", " + str(self.er_init)
 
 
 def reset(G):
@@ -580,7 +586,7 @@ def draw_network_to_file(G,pos,t):
     plt.savefig("video_of_spread/image"+str(t)+".png")
     plt.clf()
 
-def saveResultsToFile(I, Er, Et, Sr, St, R, G, params, graphType, fileName):
+def saveResultsToFile(I, Er, Et, Sr, St, R, params, graphType, fileName):
     resultsFile = open('../outputs/' + str(graphType) + '_' + str(fileName) + '.json', 'w+')
     results = []
     results.append({
@@ -590,7 +596,6 @@ def saveResultsToFile(I, Er, Et, Sr, St, R, G, params, graphType, fileName):
         "Sr": Sr,
         "St": St,
         "R": R,
-        "G": G,
         "params": params
     })
     json.dump(results, resultsFile)
@@ -621,27 +626,27 @@ ES parameters(Lambda, mu,
 
 #uncomment the type of simulation to run, either SS or ES
 
-params = SS_Params(4,0.15,
-                   0.6,0.4,0.15,
-                   0.6,0.4,0.15,
-                   0.2,0.2,
-                   50, 50, 50, 50)
-m = spread_model_factory_SS(params)
-#params = ES_Params(4,0.15,
-#                  0.6,0.4,0.15,
-#                  0.6,0.4,0.15,
-#                  0.2,0.2,
-#                  50, 50, 50, 50)
-#m = spread_model_factory_ES(params)
+# params = SS_Params(4,0.15,
+#                    0.6,0.4,0.15,
+#                    0.6,0.4,0.15,
+#                    0.2,0.2,
+#                    50, 50, 50, 50)
+# m = spread_model_factory_SS(params)
+params = ES_Params(4,0.15,
+                 0.6,0.4,0.15,
+                 0.6,0.4,0.15,
+                 0.2,0.2,
+                 50, 50, 50, 50)
+m = spread_model_factory_ES(params)
 
 #uncomment the method of initializing exposed, and spreaders
-# initialise_rumor_random(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #random selection of spreaders and exposed
-initialise_truth_degree(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest degree as spreaders of truth
+initialise_rumor_random(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #random selection of spreaders and exposed
+# initialise_truth_degree(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest degree as spreaders of truth
 # initialise_rumor_degree(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest degree as spreaders of rumor
 # initialise_truth_betweenness(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest betweenness centrality as spreaders of truth
 # initialise_rumor_betweenness(nw, params.sr_init, params.st_init, params.er_init, params.et_init) #highest betweenness centrality as spreaders of rumor
 
 #run simulation and show graph
 I, Er, Et, Sr, St, R, endtime = run_spread_simulation(nw, m, params)
-plot_infection(I, Er, Et, Sr, St, R, nw, params, "SS_Truth_Degree")
-saveResultsToFile(I, Er, Et, Sr, St, R, nw, params, "completeG", "SS_Truth_Degree")
+plot_infection(I, Er, Et, Sr, St, R, nw, params, "ES_Rumor_Random")
+saveResultsToFile(I, Er, Et, Sr, St, R, str(params), "completeG", "ES_Rumor_Random")
