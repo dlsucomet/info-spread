@@ -625,18 +625,86 @@ ES parameters(Lambda, mu,
             S+_0, S-_0, E+_0, E_0)'''
 
 #uncomment the type of simulation to run, either SS or ES
-
+###########################################
 # params = SS_Params(4,0.15,
 #                    0.6,0.4,0.15,
 #                    0.6,0.4,0.15,
 #                    0.2,0.2,
 #                    50, 50, 50, 50)
 # m = spread_model_factory_SS(params)
+# params = ES_Params(4,0.15,
+#                  0.6,0.4,0.15,
+#                  0.6,0.4,0.15,
+#                  0.2,0.2,
+#                  50, 50, 50, 50)
+# m = spread_model_factory_ES(params)
+###########################################
+
+#SS
+#Truth free
+params = SS_Params(4,0.3,
+                   0.1,0.3,0.4,
+                   0.6,0.6,0.15,
+                   0.38,0.1,
+                   50, 50, 50, 50)
+m = spread_model_factory_SS(params)
+
+#Rumor free
+params = SS_Params(4,0.15,
+                   0.6,0.6,0.15,
+                   0.1,0.3,0.4,
+                   0.38,0.1,
+                   50, 50, 50, 50)
+m = spread_model_factory_SS(params)
+
+#Truth-rumor free
+params = SS_Params(4,0.15,
+                   0.2,0.7,0.3,
+                   0.2,0.7,0.3,
+                   0.38,0.1,
+                   50, 50, 50, 50)
+m = spread_model_factory_SS(params)
+
+# Truth-Rumor coexisting
+params = SS_Params(4,0.15,
+                   0.35,0.65,0.15,
+                   0.35,0.65,0.15,
+                   0.1,0.1,
+                   50, 50, 50, 50)
+m = spread_model_factory_SS(params)
+
+###################################################
+#ES
+#Truth free
 params = ES_Params(4,0.15,
-                 0.6,0.4,0.15,
-                 0.6,0.4,0.15,
-                 0.2,0.2,
-                 50, 50, 50, 50)
+                   0.1,0.2,0.3,
+                   0.65,0.6,0.1,
+                   0.38,0.2,
+                   50, 50, 50, 50)
+m = spread_model_factory_ES(params)
+
+#Rumor free
+params = ES_Params(4,0.15,
+                   0.65,0.6,0.1,
+                   0.1,0.2,0.3,
+                   0.2,0.38,
+                   50, 50, 50, 50)
+m = spread_model_factory_ES(params)
+
+#Truth-rumor free
+params = ES_Params(4,0.15,
+                   0.2,0.7,0.3,
+                   0.2,0.7,0.3,
+                   0.38,0.38,
+                   50, 50, 50, 50)
+m = spread_model_factory_ES(params)
+
+# Truth-Rumor coexisting
+params = ES_Params(4,0.15,
+                   0.35,0.65,0.15,
+                   0.35,0.65,0.15,
+                   0.1,0.1,
+                   50, 50, 50, 50)
 m = spread_model_factory_ES(params)
 
 #uncomment the method of initializing exposed, and spreaders
